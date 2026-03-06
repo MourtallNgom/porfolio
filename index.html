@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mourtalla NGOM · Portfolio Électrotechnique</title>
-  <!-- Font Awesome 6 (free) -->
+  <title>Mourtalla NGOM · Électrotechnicien</title>
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Font (Inter + esprit technique) -->
+  <!-- Google Fonts Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -15,646 +14,615 @@
       padding: 0;
       box-sizing: border-box;
       font-family: "Inter", sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
-      background: radial-gradient(circle at 10% 30%, #cad8ed, #97b5d4);
-      min-height: 100vh;
+      background: #f0f7ff;
+      color: #132e48;
+    }
+
+    /* ----- MENU FLOTTANT (icône hamburger) ----- */
+    .menu-flottant {
+      position: fixed;
+      top: 25px;
+      right: 30px;
+      z-index: 999;
+    }
+
+    .menu-icon {
+      width: 60px;
+      height: 60px;
+      background: #1e3f64;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
-      position: relative;
-      animation: breathe 12s infinite alternate ease-in-out;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,30,60,0.5);
+      border: 2px solid #8eb9f0;
+      transition: 0.2s;
     }
 
-    @keyframes breathe {
-      0% { background: radial-gradient(circle at 10% 30%, #cad8ed, #97b5d4); }
-      100% { background: radial-gradient(circle at 90% 70%, #b7ceea, #6f8db0); }
+    .menu-icon:hover {
+      background: #285e91;
+      transform: scale(1.05) rotate(90deg);
     }
 
-    .portfolio-card {
-      max-width: 1400px;
-      width: 100%;
-      background: rgba(248, 251, 255, 0.75);
-      backdrop-filter: blur(12px);
-      border-radius: 3.5rem 3.5rem 2.5rem 2.5rem;
-      box-shadow: 0 30px 60px -10px rgba(18, 38, 61, 0.4), 0 0 0 1px rgba(255,255,255,0.6) inset, 0 0 0 2px rgba(105, 140, 180, 0.2);
-      overflow: hidden;
-      transition: all 0.3s ease;
+    /* Panneau de navigation (caché par défaut) */
+    .nav-panel {
+      position: fixed;
+      top: 100px;
+      right: 30px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      border-radius: 40px 15px 40px 15px;
+      padding: 1.2rem 0.5rem;
+      box-shadow: 0 25px 40px -12px #001e3c, 0 0 0 2px white inset;
+      border: 1px solid #b3d1f5;
+      width: 260px;
+      transform: translateX(400px);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 998;
+    }
+
+    .nav-panel.open {
+      transform: translateX(0);
+    }
+
+    .nav-panel ul {
+      list-style: none;
+      padding: 0.5rem;
+    }
+
+    .nav-panel li {
+      margin: 1rem 0;
+    }
+
+    .nav-panel a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: rgba(255,255,255,0.6);
+      border-radius: 60px;
+      color: #113456;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid #acc9ed;
+      transition: 0.15s;
+      font-size: 1rem;
+    }
+
+    .nav-panel a i {
+      width: 28px;
+      color: #1f4b7c;
+      font-size: 1.2rem;
+    }
+
+    .nav-panel a:hover {
+      background: #1d4b79;
+      color: white;
+      border-color: white;
+      transform: translateX(6px);
+    }
+
+    .nav-panel a:hover i {
+      color: white;
+    }
+
+    /* Header principal (hero) */
+    .site-header {
+      background: linear-gradient(125deg, #13324f, #2d5885 80%);
+      color: white;
+      padding: 3rem 2rem 5rem 2rem;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px #1c3c5e;
+    }
+
+    .header-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .identity h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      text-shadow: 0 4px 12px black;
+    }
+
+    .identity .title {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #d6e9ff;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-pill {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+      padding: 0.4rem 1.5rem;
+      border-radius: 60px;
       border: 1px solid rgba(255,255,255,0.4);
     }
 
-    /* header dynamique + vague */
-    .header-tile {
-      background: linear-gradient(105deg, #1e334d 0%, #2f4f73 45%, #446a94 100%);
-      padding: 2rem 3rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 4px solid #7ca2cc;
-      position: relative;
-      isolation: isolate;
-    }
-    .header-tile::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 20px, transparent 20px, transparent 40px);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .name-title h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: white;
-      line-height: 1;
-      text-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      animation: glitch 4s infinite;
-    }
-    @keyframes glitch {
-      2%, 8% { transform: skew(2deg, 0.5deg); text-shadow: -2px 0 #58a6ff, 2px 0 #ffb86b; }
-      4% { transform: skew(-2deg, -0.5deg); text-shadow: 2px 0 #58a6ff, -2px 0 #ffb86b; }
-      10%, 100% { transform: skew(0); text-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-    }
-
-    .name-title .subhead {
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: #dfe9fc;
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .badge-tech {
-      background: linear-gradient(145deg, #345f89, #1c3c5e);
-      padding: 0.3rem 1.5rem;
-      border-radius: 60px;
-      color: white;
-      font-weight: 600;
-      font-size: 0.9rem;
-      border: 1px solid #8eb6e6;
-      box-shadow: 0 2px 10px #001c33;
-      backdrop-filter: blur(2px);
-    }
-
-    .grid-main {
-      display: grid;
-      grid-template-columns: 1fr 2.1fr;
-      gap: 0;
-    }
-
-    /* colonne gauche améliorée avec glassmorph */
-    .sidebar {
-      background: rgba(219, 235, 250, 0.7);
+    .quick-info {
+      background: rgba(255,255,255,0.1);
       backdrop-filter: blur(8px);
-      padding: 2.5rem 2rem;
-      border-right: 1px solid rgba(104, 144, 187, 0.5);
-      box-shadow: 4px 0 20px -10px #1f3d5e;
+      padding: 1rem 2rem;
+      border-radius: 80px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .quick-info i {
+      color: #fdd97c;
+      margin-right: 0.4rem;
+    }
+
+    /* sections */
+    .section {
+      max-width: 1300px;
+      margin: 0 auto 4rem auto;
+      padding: 0 2rem;
+      scroll-margin-top: 90px;  /* pour que le menu ne cache pas le titre */
     }
 
     .section-title {
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-weight: 700;
-      color: #13314f;
-      margin-bottom: 1.2rem;
-      border-bottom: 3px solid #5378a5;
-      padding-bottom: 0.6rem;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #10416b;
+      margin-bottom: 2rem;
       display: flex;
       align-items: center;
-      gap: 10px;
-      transition: 0.2s;
-    }
-    .section-title i {
-      color: #2b5580;
-      font-size: 1.3rem;
-      background: white;
-      padding: 0.3rem;
-      border-radius: 50%;
-      box-shadow: 0 0 0 2px #acc6e7;
-    }
-
-    .profile-text {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(4px);
-      padding: 1.4rem;
-      border-radius: 30px 10px 30px 10px;
-      color: #0b273f;
-      font-weight: 400;
-      line-height: 1.7;
-      border: 1px solid white;
-      box-shadow: 0 10px 20px -12px #10273f;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(2px);
-      padding: 0.9rem 1.2rem;
-      border-radius: 50px;
-      margin-bottom: 1rem;
-      border: 1px solid white;
-      transition: all 0.2s;
-      box-shadow: 0 6px 12px -8px #244460;
-    }
-    .contact-item:hover {
-      background: white;
-      transform: translateX(6px) scale(1.02);
-      border-color: #4273a5;
-    }
-    .contact-item i {
-      width: 28px;
-      color: #1e4b7c;
-      font-size: 1.4rem;
-    }
-
-    .lang-item {
-      display: flex;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.75);
-      padding: 0.7rem 1.2rem;
-      border-radius: 60px;
-      margin-bottom: 0.8rem;
-      border: 1px solid #b5cfef;
-      font-weight: 600;
-      color: #103351;
-      backdrop-filter: blur(2px);
-    }
-    .level {
-      background: #31628f;
-      color: white;
-      padding: 0.2rem 1.2rem;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.4px;
-    }
-
-    .hobby-pills {
-      display: flex;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
-    .hobby-pills span {
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(4px);
-      padding: 0.6rem 2rem;
-      border-radius: 120px;
-      border: 1px solid white;
-      font-weight: 600;
-      color: #14466b;
-      box-shadow: 0 4px 8px #97b3d3;
-      transition: 0.2s;
-    }
-    .hobby-pills span:hover {
-      background: white;
-      box-shadow: 0 8px 14px #506e93;
-      transform: scale(1.05);
-    }
-
-    /* colonne droite plus aérée */
-    .main-content {
-      background: rgba(252, 254, 255, 0.6);
-      backdrop-filter: blur(6px);
-      padding: 2.5rem 2.5rem 2.5rem 2rem;
-    }
-
-    .exp-item, .formation-item {
-      margin-bottom: 1.8rem;
-      animation: fadeSlide 0.6s ease backwards;
-    }
-    @keyframes fadeSlide {
-      0% { opacity: 0; transform: translateX(12px); }
-      100% { opacity: 1; transform: translateX(0); }
-    }
-
-    .exp-header {
-      display: flex;
-      align-items: baseline;
       gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 0.3rem;
-    }
-    .year {
-      background: #203f60;
-      color: white;
-      font-weight: 700;
-      padding: 0.2rem 1.4rem;
-      border-radius: 60px;
-      font-size: 0.8rem;
-      letter-spacing: 0.8px;
-      box-shadow: 0 2px 0 #0b1f31;
-      transition: 0.2s;
-    }
-    .exp-title {
-      font-weight: 700;
-      color: #03223f;
-      font-size: 1.15rem;
-      position: relative;
-    }
-    .exp-place {
-      color: #2a5783;
-      font-weight: 500;
-      font-style: italic;
-    }
-    .exp-desc {
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(2px);
-      padding: 0.9rem 1.3rem;
-      border-radius: 0 24px 24px 24px;
-      color: #0e2c48;
-      border-left: 6px solid #3c6ea0;
-      margin-top: 0.6rem;
-      font-weight: 400;
-      box-shadow: 0 4px 8px #bacde4;
+      border-bottom: 4px solid #bbd3f0;
+      padding-bottom: 0.7rem;
     }
 
-    .formation-item {
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(4px);
-      border-radius: 30px 8px 30px 8px;
-      padding: 1.2rem 1.3rem;
+    .section-title i {
+      background: #1f4e7c;
+      color: white;
+      padding: 0.7rem;
+      border-radius: 50%;
+      font-size: 1.5rem;
+    }
+
+    /* profils contact */
+    .profil-contact {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      background: #dfecfd;
+      border-radius: 50px 20px 50px 20px;
+      padding: 2rem;
       border: 1px solid white;
+    }
+
+    .profil-text {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 40px 10px 40px 10px;
+      font-size: 1.1rem;
+    }
+
+    .contact-mini {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* langues & loisirs */
+    .lang-hobby {
+      background: white;
+      border-radius: 60px 20px 60px 20px;
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      border: 1px solid #cde0f8;
+    }
+
+    .lang-badge {
+      background: #e7f0ff;
+      padding: 0.5rem 2rem 0.5rem 1.5rem;
+      border-radius: 60px;
+      font-weight: 600;
+      border: 1px solid #8fb6e8;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lang-level {
+      background: #336699;
+      color: white;
+      border-radius: 60px;
+      padding: 0.2rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .hobby-item {
+      background: #dfebfc;
+      padding: 0.5rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      border: 1px solid #6f9fd3;
+    }
+
+    /* cartes exp/formation */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px 10px 28px 10px;
+      padding: 1.8rem;
+      box-shadow: 0 15px 25px -12px #9eb9d8;
+      border: 1px solid #e2efff;
       transition: 0.2s;
     }
-    .formation-item:hover {
-      background: rgba(255, 255, 255, 0.8);
-      transform: scale(1.01);
-      border-color: #6c94c0;
-    }
-    .diplome {
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: #0d3a60;
-      margin: 0.2rem 0;
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 35px -12px #1e4670;
     }
 
-    /* nuage de compétences interactif + 3D */
-    .skills-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin: 1.5rem 0;
-      perspective: 600px;
-    }
-    .skill-tag {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(4px);
-      padding: 0.7rem 1.5rem;
-      border-radius: 80px;
-      font-weight: 500;
-      color: #113655;
-      box-shadow: 0 4px 10px #acc0db, 0 2px 0 #ffffff inset;
-      border: 1px solid #eef5ff;
-      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.3);
-      cursor: default;
-      font-size: 0.9rem;
-      transform: rotateX(0deg) translateZ(0);
-    }
-    .skill-tag:hover {
-      background: #305f8b;
+    .card-year {
+      background: #1e4a76;
       color: white;
-      transform: rotateX(4deg) translateZ(12px) scale(1.1);
-      box-shadow: 0 16px 20px -8px #253e5c, 0 0 0 2px white;
-      border-color: #a3c6ff;
+      display: inline-block;
+      padding: 0.2rem 1.2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
     }
 
-    /* zone dynamique ultra réactive */
-    .dynamic-box {
-      margin-top: 2.5rem;
-      background: rgba(214, 232, 255, 0.7);
-      backdrop-filter: blur(12px);
-      border-radius: 50px 16px 50px 16px;
-      padding: 1.8rem 2rem;
-      border: 2px solid rgba(255,255,255,0.9);
-      box-shadow: 0 16px 30px -12px #1f3f62, 0 0 0 1px #759cc9 inset;
+    /* compétences */
+    .skills-panel {
+      background: #eaf3ff;
+      border-radius: 60px 20px 60px 20px;
+      padding: 2.5rem;
+      border: 2px solid white;
     }
 
-    .action-bar {
+    .skill-cloud {
       display: flex;
-      gap: 1.2rem;
-      align-items: center;
       flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    .action-btn {
-      background: linear-gradient(125deg, #234d74, #3f6f9f);
+    .skill-item {
+      background: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 600;
+      color: #154a76;
+      box-shadow: 0 6px 10px -6px #2c5782;
+      border: 1px solid #b6d4fc;
+    }
+
+    /* zone dynamique */
+    .dynamic-zone {
+      background: #d7e8ff;
+      border-radius: 80px 20px 80px 20px;
+      padding: 2.5rem;
+      margin-top: 2rem;
+      border: 2px solid white;
+    }
+
+    .dynamic-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .dynamic-btn {
+      background: #1b4a77;
       border: none;
       color: white;
-      padding: 1rem 2.5rem;
-      border-radius: 80px;
+      padding: 1.2rem 2.5rem;
+      border-radius: 60px;
       font-weight: 700;
       font-size: 1.1rem;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 0.8rem;
-      cursor: pointer;
-      transition: all 0.25s;
-      border: 1px solid #c2ddff;
-      box-shadow: 0 10px 14px -8px #122d44;
-      letter-spacing: 0.5px;
-    }
-    .action-btn:hover {
-      background: linear-gradient(125deg, #2d5d8c, #1d3e62);
-      box-shadow: 0 18px 25px -10px #001e36, 0 0 0 2px white;
-      transform: scale(1.05) translateY(-3px);
-    }
-    .action-btn:active {
-      transform: scale(0.98);
+      border: 1px solid #b1d0f7;
     }
 
-    #displayZone {
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(10px);
+    .dynamic-message {
+      background: white;
       padding: 1rem 2rem;
-      border-radius: 120px;
+      border-radius: 60px;
       flex: 1;
-      min-width: 260px;
-      color: #002856;
       font-weight: 600;
-      font-size: 1.05rem;
-      border: 1px solid white;
-      box-shadow: inset 0 3px 10px #c3d5ed, 0 8px 12px -8px #1f3d60;
-      transition: 0.2s;
+      color: #002856;
       text-align: center;
     }
 
-    .footer-note {
-      text-align: right;
-      color: #2e517a;
-      margin-top: 1.2rem;
-      font-size: 0.9rem;
-      border-top: 2px dashed rgba(255,255,255,0.7);
-      padding-top: 1rem;
+    /* footer */
+    .site-footer {
+      background: #1a3550;
+      color: #c9dcf5;
+      padding: 2rem;
+      border-radius: 60px 60px 0 0;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1300px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
 
-    /* bouton flottant pour likes / interaction supplémentaire */
-    .like-area {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .like-btn {
-      background: transparent;
-      border: 2px solid white;
-      color: #1c4875;
-      padding: 0.3rem 1.2rem;
-      border-radius: 40px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.2s;
-      backdrop-filter: blur(8px);
-    }
-    .like-btn:hover {
-      background: white;
-      color: #0f3860;
-      border-color: #1b4b7a;
+    .social i {
+      font-size: 1.5rem;
+      margin: 0 0.4rem;
+      color: #b5d1f0;
     }
 
-    /* responsive */
-    @media (max-width: 950px) {
-      .grid-main { grid-template-columns: 1fr; }
-      .sidebar { border-right: none; border-bottom: 1px solid #b5c9e0; }
-      .header-tile { flex-direction: column; align-items: start; gap: 1rem; }
-    }
-    @media (max-width: 550px) {
-      .name-title h1 { font-size: 2.4rem; }
-      .action-bar { flex-direction: column; }
-    }
-
-    /* petite animation sur les années */
-    .year {
-      animation: pulseYear 3s infinite;
-    }
-    @keyframes pulseYear {
-      0% { background: #203f60; }
-      50% { background: #345f8b; box-shadow: 0 0 0 3px rgba(255,255,255,0.3); }
-      100% { background: #203f60; }
-    }
-
-    /* chargement dynamique de compétences */
-    .glow {
-      animation: glowPulse 2s infinite;
+    @media (max-width: 700px) {
+      .header-container { flex-direction: column; align-items: start; }
+      .quick-info { flex-direction: column; width: 100%; }
+      .profil-contact { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="portfolio-card">
 
-    <!-- header amélioré -->
-    <div class="header-tile">
-      <div class="name-title">
-        <h1>MOURTALLA NGOM</h1>
-        <div class="subhead">
-          <i class="fas fa-bolt" style="color: #f5e56b;"></i> Technicien Supérieur Électrotechnique
-          <span class="badge-tech"><i class="fas fa-microchip"></i> L3 Génie Électrique</span>
-        </div>
-      </div>
-      <div style="color: #e5f0ff; font-size: 1.1rem; text-shadow: 0 2px 3px black;">
-        <i class="fas fa-map-marker-alt"></i> Dakar/HLM 2 · <i class="fas fa-phone-alt"></i> 78 455 91 12
-      </div>
+  <!-- 🌟 MENU FLOTTANT : icône hamburger + panneau de navigation -->
+  <div class="menu-flottant">
+    <div class="menu-icon" id="menuToggle">
+      <i class="fas fa-bars" id="menuIcon"></i>
     </div>
-
-    <!-- Grille -->
-    <div class="grid-main">
-      <!-- GAUCHE -->
-      <div class="sidebar">
-        <div class="profile-block">
-          <div class="section-title"><i class="fas fa-user-astronaut"></i> Profil</div>
-          <div class="profile-text">
-            <i class="fas fa-quote-left" style="color:#305f88; opacity:0.5;"></i> 
-            Titulaire d'une Licence en Génie Électrique, je suis rigoureux, sociable et méthodique. 
-            Sens de l'observation, d'analyse et d'adaptation. Mes expériences et compétences me poussent à vouloir intégrer votre structure.
-          </div>
-        </div>
-
-        <div class="contact-block">
-          <div class="section-title"><i class="fas fa-address-card"></i> Contact</div>
-          <div class="contact-item"><i class="fas fa-phone"></i> 78 455 91 12</div>
-          <div class="contact-item"><i class="fas fa-envelope"></i> Mourtalla512@gmail.com</div>
-          <div class="contact-item"><i class="fas fa-map-pin"></i> Dakar / HLM 2</div>
-        </div>
-
-        <div class="lang-block">
-          <div class="section-title"><i class="fas fa-language"></i> Langues</div>
-          <div class="lang-item"><span>Français 🇫🇷</span><span class="level">Bon niveau</span></div>
-          <div class="lang-item"><span>Anglais 🇬🇧</span><span class="level">Moyen</span></div>
-          <div class="lang-item"><span>Wolof 🇸🇳</span><span class="level">Maternelle</span></div>
-        </div>
-
-        <div class="hobby-block">
-          <div class="section-title"><i class="fas fa-dumbbell"></i> Loisirs</div>
-          <div class="hobby-pills">
-            <span><i class="fas fa-futbol"></i> Sport</span>
-            <span><i class="fas fa-dice"></i> Scrabble</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- DROITE -->
-      <div class="main-content">
-        <!-- Expériences -->
-        <div class="section-title"><i class="fas fa-briefcase"></i> Expériences</div>
-        <div class="exp-item" style="animation-delay: 0.1s;">
-          <div class="exp-header"><span class="year">2025</span><span class="exp-title">Stage technicien électrique</span><span class="exp-place">· LSE/SOGEA SATOM</span></div>
-          <div class="exp-desc">Câblage industrielle, maintenance, suivi des installations chez les spécialistes de l'énergie.</div>
-        </div>
-        <div class="exp-item" style="animation-delay: 0.2s;">
-          <div class="exp-header"><span class="year">2024</span><span class="exp-title">Technicien NRJ (SONATEL)</span><span class="exp-place">· responsable sites stratégiques</span></div>
-          <div class="exp-desc">Supervision des équipements électriques, maintenance préventive sur sites sensibles.</div>
-        </div>
-        <div class="exp-item" style="animation-delay: 0.3s;">
-          <div class="exp-header"><span class="year">2024</span><span class="exp-title">Stage COSELEC</span><span class="exp-place">· 1 mois</span></div>
-          <div class="exp-desc">Découverte des réseaux électriques basse tension et armoires industrielles.</div>
-        </div>
-        <div class="exp-item" style="animation-delay: 0.4s;">
-          <div class="exp-header"><span class="year">2023</span><span class="exp-title">Stage Compagnie Sucrière Sénégalaise</span><span class="exp-place">· 2 mois</span></div>
-          <div class="exp-desc">Câblage industrielle et maintenance d'équipements automatisés.</div>
-        </div>
-
-        <!-- Formations -->
-        <div class="section-title" style="margin-top: 2.2rem;"><i class="fas fa-graduation-cap"></i> Formations</div>
-        <div class="formation-item" style="animation-delay: 0.2s;">
-          <span class="year">2023/2024</span>
-          <div class="diplome">Licence 3 Génie Électrique (distrib. électrique & automatisme)</div>
-          <div class="etablissement">École Supérieure Polytechnique de Dakar</div>
-        </div>
-        <div class="formation-item" style="animation-delay: 0.25s;">
-          <span class="year">2021/2023</span>
-          <div class="diplome">BTS2 Électrotechnique</div>
-          <div class="etablissement">CEDT Le G15</div>
-        </div>
-        <div class="formation-item" style="animation-delay: 0.3s;">
-          <span class="year">2022</span>
-          <div class="diplome">Attestation Dimensionnement Solaire</div>
-        </div>
-        <div class="formation-item" style="animation-delay: 0.35s;">
-          <span class="year">2020/2021</span>
-          <div class="diplome">Baccalauréat S2</div>
-          <div class="etablissement">Lycée Mame Cheikh Mbaye de Tamba</div>
-        </div>
-
-        <!-- Compétences cloud dynamique (injecté par JS) -->
-        <div class="section-title" style="margin-top: 2.2rem;"><i class="fas fa-cogs"></i> Compétences</div>
-        <div class="skills-cloud" id="skillCloud"></div>
-
-        <!-- Zone dynamique améliorée + like compteur -->
-        <div class="dynamic-box">
-          <div class="action-bar">
-            <button class="action-btn" id="revealBtn"><i class="fas fa-sync-alt fa-spin" style="--fa-animation-duration: 3s;"></i> Cliquez ici pour resume </button>
-            <div id="displayZone">✨ Interagissez ✨</div>
-          </div>
-          <div class="footer-note">
-            <span><i class="fas fa-bolt" style="color:#0d3f70;"></i> électrotech · automation · solaire</span>
-            <div class="like-area">
-              <span id="likeCount">124</span>
-              <button class="like-btn" id="likeBtn"><i class="fas fa-heart"></i> J'aime</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <nav class="nav-panel" id="navPanel">
+      <ul>
+        <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
+        <li><a href="#profil"><i class="fas fa-user"></i> Profil</a></li>
+        <li><a href="#langues"><i class="fas fa-language"></i> Langues & Loisirs</a></li>
+        <li><a href="#experiences"><i class="fas fa-briefcase"></i> Expériences</a></li>
+        <li><a href="#formations"><i class="fas fa-graduation-cap"></i> Formations</a></li>
+        <li><a href="#competences"><i class="fas fa-cogs"></i> Compétences</a></li>
+        <li><a href="#interactif"><i class="fas fa-comment"></i> Zone interactive</a></li>
+      </ul>
+    </nav>
   </div>
+
+  <!-- ACCUEIL (ancre) -->
+  <span id="accueil"></span>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="identity">
+        <h1>Mourtalla NGOM</h1>
+        <div class="title">
+          <i class="fas fa-bolt" style="color: #ffd966;"></i> Technicien Supérieur Électrotechnique
+          <span class="badge-pill">L3 Génie Électrique</span>
+        </div>
+      </div>
+      <div class="quick-info">
+        <span><i class="fas fa-map-marker-alt"></i> Dakar/HLM 2</span>
+        <span><i class="fas fa-phone-alt"></i> 78 455 91 12</span>
+        <span><i class="fas fa-envelope"></i> Mourtalla512@gmail.com</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION PROFIL -->
+  <section id="profil" class="section">
+    <div class="section-title"><i class="fas fa-user-circle"></i> Profil & Contact</div>
+    <div class="profil-contact">
+      <div class="profil-text">
+        <i class="fas fa-quote-left" style="color:#2f5f8a; opacity:0.4;"></i>
+        Titulaire d'une Licence en Génie Électrique, je suis rigoureux, sociable et méthodique. Sens de l'observation, d'analyse et d'adaptation. Mes expériences et compétences me poussent à vouloir intégrer votre structure.
+      </div>
+      <div class="contact-mini">
+        <div class="contact-line"><i class="fas fa-phone"></i> 78 455 91 12</div>
+        <div class="contact-line"><i class="fas fa-envelope"></i> Mourtalla512@gmail.com</div>
+        <div class="contact-line"><i class="fas fa-map-pin"></i> Dakar HLM 2</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION LANGUES & LOISIRS -->
+  <section id="langues" class="section">
+    <div class="section-title"><i class="fas fa-heart"></i> Langues & Loisirs</div>
+    <div class="lang-hobby">
+      <div class="lang-list" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        <span class="lang-badge">Français <span class="lang-level">Bon niveau</span></span>
+        <span class="lang-badge">Anglais <span class="lang-level">Moyen</span></span>
+        <span class="lang-badge">Wolof <span class="lang-level">Maternelle</span></span>
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <span class="hobby-item"><i class="fas fa-futbol"></i> Sport</span>
+        <span class="hobby-item"><i class="fas fa-dice"></i> Scrabble</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION EXPÉRIENCES -->
+  <section id="experiences" class="section">
+    <div class="section-title"><i class="fas fa-briefcase"></i> Expériences</div>
+    <div class="cards-grid">
+      <div class="card"><span class="card-year">2025</span><h3>Stage technicien électrique</h3><div class="card-sub">LSE/SOGEA SATOM</div><div class="card-desc">Câblage industrielle, maintenance, suivi des installations.</div></div>
+      <div class="card"><span class="card-year">2024</span><h3>Technicien NRJ</h3><div class="card-sub">SONATEL · sites stratégiques</div><div class="card-desc">Supervision des équipements électriques, maintenance préventive.</div></div>
+      <div class="card"><span class="card-year">2024</span><h3>Stage COSELEC</h3><div class="card-sub">1 mois</div><div class="card-desc">Réseaux BT, armoires industrielles.</div></div>
+      <div class="card"><span class="card-year">2023</span><h3>Stage CSS</h3><div class="card-sub">2 mois</div><div class="card-desc">Câblage industrielle, maintenance automatisée.</div></div>
+    </div>
+  </section>
+
+  <!-- SECTION FORMATIONS -->
+  <section id="formations" class="section">
+    <div class="section-title"><i class="fas fa-graduation-cap"></i> Formations</div>
+    <div class="cards-grid">
+      <div class="card"><span class="card-year">2023/24</span><h3>Licence 3 Génie Électrique</h3><div class="card-sub">ESP Dakar</div></div>
+      <div class="card"><span class="card-year">2021/23</span><h3>BTS2 Électrotechnique</h3><div class="card-sub">CEDT G15</div></div>
+      <div class="card"><span class="card-year">2022</span><h3>Attestation Dimensionnement Solaire</h3></div>
+      <div class="card"><span class="card-year">2020/21</span><h3>Bac S2</h3><div class="card-sub">Lycée Mame Cheikh Mbaye</div></div>
+    </div>
+  </section>
+
+  <!-- SECTION COMPÉTENCES -->
+  <section id="competences" class="section">
+    <div class="section-title"><i class="fas fa-cogs"></i> Compétences</div>
+    <div class="skills-panel">
+      <div class="skill-cloud" id="skillCloud"></div>
+    </div>
+  </section>
+
+  <!-- SECTION INTERACTIVE -->
+  <section id="interactif" class="section">
+    <div class="section-title"><i class="fas fa-comment-dots"></i> Zone interactive</div>
+    <div class="dynamic-zone">
+      <div class="dynamic-wrapper">
+        <button class="dynamic-btn" id="revealBtn"><i class="fas fa-sync-alt"></i> Parcours express</button>
+        <div class="dynamic-message" id="displayMsg">Cliquez pour explorer mes atouts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>© 2026 Mourtalla NGOM</span>
+      <span><i class="fas fa-bolt"></i> Disponible</span>
+      <div class="social"><i class="fab fa-linkedin"></i> <i class="fab fa-github"></i></div>
+    </div>
+  </footer>
 
   <script>
     (function() {
-      // Compétences enrichies depuis le CV
-      const skills = [
-        "Installation domestique/industrielle", "Conduite poids léger (manuelle/auto)",
-        "Zelio (Ladder, FBD)", "Mplab", "Proteus", "TIA Siemens", "AutoCAD (implantation)",
-        "Conception réseau électrique", "Excel", "Câblage industrielle", "Dimensionnement solaire"
-      ];
+      // === MENU HAMBURGER ===
+      const toggleBtn = document.getElementById('menuToggle');
+      const panel = document.getElementById('navPanel');
+      const icon = document.getElementById('menuIcon');
 
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        panel.classList.toggle('open');
+        // changer icône entre bars et times
+        if (panel.classList.contains('open')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+
+      // fermer le menu si on clique sur un lien (optionnel)
+      const navLinks = document.querySelectorAll('.nav-panel a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          panel.classList.remove('open');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        });
+      });
+
+      // fermer si on clique en dehors (optionnel, plus confortable)
+      document.addEventListener('click', (e) => {
+        if (!panel.contains(e.target) && !toggleBtn.contains(e.target)) {
+          panel.classList.remove('open');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+
+      // === NUAGE DE COMPÉTENCES ===
+      const skills = [
+        "Installation domestique/industrielle", "Conduite poids léger", "Zelio (Ladder, FBD)",
+        "Mplab", "Proteus", "TIA Siemens", "AutoCAD (implantation)", "Conception réseau électrique",
+        "Excel", "Câblage industrielle", "Dimensionnement solaire"
+      ];
       const cloud = document.getElementById('skillCloud');
       if (cloud) {
-        skills.forEach(skill => {
-          const tag = document.createElement('span');
-          tag.className = 'skill-tag';
-          tag.textContent = skill;
-          cloud.appendChild(tag);
+        skills.forEach(s => {
+          let span = document.createElement('span');
+          span.className = 'skill-item';
+          span.textContent = s;
+          cloud.appendChild(span);
         });
       }
 
-      // Données pour le défilement dynamique (encore plus d'infos)
+      // === ZONE DYNAMIQUE (messages) ===
       const messages = [
-        "🔋 Licence Génie Électrique (ESP Dakar) 2024",
-        "⚡ Stage LSE/SOGEA SATOM : câblage industriel",
-        "📡 2024 : Technicien NRJ chez SONATEL (sites stratégiques)",
-        "🔧 Maîtrise TIA, Proteus, Zelio, Mplab, AutoCAD",
-        "☀️ Certifié dimensionnement solaire (2022)",
-        "🏭 Expérience sucrière (CSS) – 2 mois câblage",
-        "🎓 BTS Électrotechnique CEDT G15 + Bac S2",
-        "🚗 Permis VL (manuel + auto) · véhicule de service",
-        "📍 Dakar HLM 2 · disponibilité immédiate",
-        "📊 Excel · Conception réseau électrique"
+        "🎓 Licence Génie Électrique - ESP Dakar",
+        "⚡ 2025 : Stage LSE / SOGEA SATOM",
+        "📡 2024 : Technicien NRJ chez SONATEL",
+        "🔧 TIA, Proteus, Zelio, AutoCAD, Mplab",
+        "☀️ Certifié en dimensionnement solaire (2022)",
+        "🏭 Expérience sucrière (CSS) et COSELEC",
+        "🚗 Permis VL (manuel + automatique)",
+        "📍 Basé à Dakar HLM 2"
       ];
 
-      const displayZone = document.getElementById('displayZone');
-      const revealBtn = document.getElementById('revealBtn');
-      let msgIndex = 0;
+      const msgDiv = document.getElementById('displayMsg');
+      const btn = document.getElementById('revealBtn');
+      let idx = 0;
 
-      function showNextMessage() {
-        displayZone.textContent = messages[msgIndex % messages.length];
-        // effet flash
-        displayZone.style.transform = 'scale(1.02)';
-        displayZone.style.background = '#d8ecff';
-        setTimeout(() => {
-          displayZone.style.transform = 'scale(1)';
-          displayZone.style.background = 'rgba(255,255,255,0.8)';
-        }, 200);
-        msgIndex++;
-      }
+      if (btn && msgDiv) {
+        btn.addEventListener('click', () => {
+          msgDiv.textContent = messages[idx % messages.length];
+          msgDiv.style.background = '#ecf5ff';
+          setTimeout(() => msgDiv.style.background = 'white', 200);
+          idx++;
+        });
 
-      if (revealBtn) {
-        revealBtn.addEventListener('click', showNextMessage);
-        // premier message après 2s
         setTimeout(() => {
-          displayZone.textContent = "🔍 Mourtalla NGOM · 5 expériences · prêt à relever des défis";
+          msgDiv.textContent = "🔋 Bienvenue sur mon site !";
         }, 1500);
       }
 
-      // Like button interactif
-      const likeBtn = document.getElementById('likeBtn');
-      const likeSpan = document.getElementById('likeCount');
-      let likes = 124;
-      if (likeBtn) {
-        likeBtn.addEventListener('click', () => {
-          likes += 1;
-          likeSpan.textContent = likes;
-          likeBtn.style.background = '#ffd966';
-          likeBtn.style.color = '#102b44';
-          setTimeout(() => {
-            likeBtn.style.background = 'transparent';
-            likeBtn.style.color = '#1c4875';
-          }, 200);
+      // Animation d'apparition pour les cartes (optionnel)
+      const cards = document.querySelectorAll('.card');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = 1;
+            e.target.style.transform = 'translateY(0)';
+          }
         });
-      }
-
-      // Petite animation sur les années (effet pulse personnalisé)
-      // déjà en CSS
-
-      // Hover sur header déjà fait
-
-      // bonus : horloge / message de visite (optionnel)
-      const footerNote = document.querySelector('.footer-note span');
-      if (footerNote) {
-        const now = new Date();
-        const hours = now.getHours();
-        let greeting = hours < 12 ? '☀️ matin' : hours < 18 ? '⛅ après-midi' : '🌙 soir';
-      }
+      }, {threshold:0.2});
+      cards.forEach(c => {
+        c.style.opacity = 0;
+        c.style.transform = 'translateY(20px)';
+        c.style.transition = '0.4s';
+        obs.observe(c);
+      });
     })();
   </script>
 </body>
