@@ -6,7 +6,7 @@
   <title>Mourtalla NGOM · Électrotechnicien</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts Inter -->
+  <!-- Google Fonts Inter + espace technique -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -18,11 +18,12 @@
     }
 
     body {
-      background: #f0f7ff;
-      color: #132e48;
+      background: #eef3f8;  /* gris-bleu très doux */
+      color: #1d2f40;
+      line-height: 1.5;
     }
 
-    /* ----- MENU FLOTTANT (icône hamburger) ----- */
+    /* ----- MENU FLOTTANT AMÉLIORÉ ----- */
     .menu-flottant {
       position: fixed;
       top: 25px;
@@ -31,41 +32,41 @@
     }
 
     .menu-icon {
-      width: 60px;
-      height: 60px;
-      background: #1e3f64;
+      width: 65px;
+      height: 65px;
+      background: linear-gradient(145deg, #2c405a, #1f324b);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.8rem;
+      font-size: 2rem;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0,30,60,0.5);
-      border: 2px solid #8eb9f0;
-      transition: 0.2s;
+      box-shadow: 0 12px 25px rgba(0,20,50,0.5), 0 0 0 3px rgba(255,255,255,0.3) inset;
+      border: 1px solid #a5c1e5;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .menu-icon:hover {
-      background: #285e91;
-      transform: scale(1.05) rotate(90deg);
+      background: linear-gradient(145deg, #3a5272, #27415f);
+      transform: scale(1.1) rotate(360deg);
+      box-shadow: 0 18px 30px #001e3b, 0 0 0 4px white inset;
     }
 
-    /* Panneau de navigation (caché par défaut) */
     .nav-panel {
       position: fixed;
-      top: 100px;
+      top: 105px;
       right: 30px;
-      background: rgba(255,255,255,0.85);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(16px);
-      border-radius: 40px 15px 40px 15px;
-      padding: 1.2rem 0.5rem;
-      box-shadow: 0 25px 40px -12px #001e3c, 0 0 0 2px white inset;
-      border: 1px solid #b3d1f5;
-      width: 260px;
-      transform: translateX(400px);
-      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      border-radius: 50px 20px 50px 20px;
+      padding: 1.5rem 0.8rem;
+      box-shadow: 0 30px 50px -15px #102434, 0 0 0 2px #ffffffcc inset, 0 0 0 1px #b9d2f0;
+      width: 280px;
+      transform: translateX(450px);
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
       z-index: 998;
+      border: 1px solid rgba(255,255,255,0.8);
     }
 
     .nav-panel.open {
@@ -74,53 +75,67 @@
 
     .nav-panel ul {
       list-style: none;
-      padding: 0.5rem;
+      padding: 0.3rem;
     }
 
     .nav-panel li {
       margin: 1rem 0;
+      transform: scale(1);
+      transition: 0.2s;
     }
 
     .nav-panel a {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 0.9rem 1.5rem;
-      background: rgba(255,255,255,0.6);
-      border-radius: 60px;
-      color: #113456;
+      gap: 1.2rem;
+      padding: 1rem 1.8rem;
+      background: rgba(240, 248, 255, 0.7);
+      border-radius: 80px;
+      color: #142f4c;
       font-weight: 600;
       text-decoration: none;
-      border: 1px solid #acc9ed;
-      transition: 0.15s;
-      font-size: 1rem;
+      border: 1px solid #c9dfff;
+      transition: all 0.25s;
+      font-size: 1.05rem;
+      box-shadow: 0 6px 12px -8px #2f5379;
     }
 
     .nav-panel a i {
       width: 28px;
-      color: #1f4b7c;
-      font-size: 1.2rem;
+      color: #1f4f81;
+      font-size: 1.3rem;
+      transition: 0.2s;
     }
 
     .nav-panel a:hover {
-      background: #1d4b79;
+      background: linear-gradient(105deg, #2e4e77, #1b3b5e);
       color: white;
       border-color: white;
-      transform: translateX(6px);
+      transform: translateX(8px) scale(1.02);
+      box-shadow: 0 15px 20px -8px #091f35;
     }
 
     .nav-panel a:hover i {
       color: white;
     }
 
-    /* Header principal (hero) */
+    /* ----- HEADER (hero) avec plus de gris sophistiqué ----- */
     .site-header {
-      background: linear-gradient(125deg, #13324f, #2d5885 80%);
+      background: linear-gradient(115deg, #1f2f40 0%, #314b67 50%, #4f6d8f 100%);
       color: white;
-      padding: 3rem 2rem 5rem 2rem;
-      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-      margin-bottom: 2rem;
-      box-shadow: 0 10px 30px #1c3c5e;
+      padding: 3.5rem 2rem 6rem 2rem;
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+      margin-bottom: 2.5rem;
+      position: relative;
+      box-shadow: 0 15px 35px rgba(0,25,45,0.4);
+    }
+
+    .site-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 30px, transparent 30px, transparent 60px);
+      pointer-events: none;
     }
 
     .header-container {
@@ -130,186 +145,236 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 2;
     }
 
     .identity h1 {
-      font-size: 3.5rem;
+      font-size: 3.8rem;
       font-weight: 700;
       letter-spacing: -1px;
-      text-shadow: 0 4px 12px black;
+      text-shadow: 0 6px 14px rgba(0,0,0,0.4);
+      background: linear-gradient(135deg, #ffffff, #e0efff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .identity .title {
       font-size: 1.4rem;
       font-weight: 400;
-      color: #d6e9ff;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    .badge-pill {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(4px);
-      padding: 0.4rem 1.5rem;
-      border-radius: 60px;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
-
-    .quick-info {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(8px);
-      padding: 1rem 2rem;
-      border-radius: 80px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.8rem;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
-
-    .quick-info i {
-      color: #fdd97c;
-      margin-right: 0.4rem;
-    }
-
-    /* sections */
-    .section {
-      max-width: 1300px;
-      margin: 0 auto 4rem auto;
-      padding: 0 2rem;
-      scroll-margin-top: 90px;  /* pour que le menu ne cache pas le titre */
-    }
-
-    .section-title {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #10416b;
-      margin-bottom: 2rem;
+      color: #dae9ff;
       display: flex;
       align-items: center;
       gap: 1rem;
-      border-bottom: 4px solid #bbd3f0;
-      padding-bottom: 0.7rem;
+      flex-wrap: wrap;
+      margin-top: 0.6rem;
+    }
+
+    .badge-pill {
+      background: rgba(20, 40, 65, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 0.4rem 1.8rem;
+      border-radius: 80px;
+      border: 1px solid rgba(255,255,255,0.5);
+      font-weight: 500;
+      font-size: 1rem;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .quick-info {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 1.2rem 2.5rem;
+      border-radius: 100px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 10px 20px -5px #02182b;
+    }
+
+    .quick-info i {
+      color: #ffde7a;
+      margin-right: 0.6rem;
+      filter: drop-shadow(0 2px 4px black);
+    }
+
+    /* ----- SECTIONS (général) ----- */
+    .section {
+      max-width: 1300px;
+      margin: 0 auto 4.5rem auto;
+      padding: 0 2rem;
+      scroll-margin-top: 90px;
+    }
+
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 600;
+      color: #163752;
+      margin-bottom: 2.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      border-bottom: 4px solid #b8ceec;
+      padding-bottom: 0.8rem;
+      text-shadow: 0 2px 4px #dae6f8;
     }
 
     .section-title i {
-      background: #1f4e7c;
+      background: #274e79;
       color: white;
-      padding: 0.7rem;
+      padding: 0.8rem;
       border-radius: 50%;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
+      box-shadow: 0 8px 12px -4px #1b3858;
     }
 
-    /* profils contact */
+    /* profil + contact avec gris */
     .profil-contact {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 2rem;
-      background: #dfecfd;
-      border-radius: 50px 20px 50px 20px;
-      padding: 2rem;
-      border: 1px solid white;
+      background: #e3eefb; /* gris-bleu */
+      border-radius: 70px 25px 70px 25px;
+      padding: 2.5rem;
+      border: 1px solid #ffffff;
+      box-shadow: 0 20px 30px -10px #8faaca, 0 0 0 3px #f4f9ff inset;
     }
 
     .profil-text {
-      background: white;
-      padding: 1.8rem;
-      border-radius: 40px 10px 40px 10px;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      padding: 2rem;
+      border-radius: 60px 15px 60px 15px;
       font-size: 1.1rem;
+      color: #10273f;
+      border: 1px solid white;
     }
 
     .contact-mini {
-      background: white;
-      padding: 1.8rem;
-      border-radius: 40px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(6px);
+      padding: 2rem;
+      border-radius: 60px 15px 60px 15px;
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
+      border: 1px solid white;
     }
 
     .contact-line {
       display: flex;
       align-items: center;
       gap: 1rem;
+      font-size: 1.1rem;
+      background: rgba(255,255,255,0.5);
+      padding: 0.9rem 1.5rem;
+      border-radius: 100px;
+      border: 1px solid #c7ddfc;
     }
 
-    /* langues & loisirs */
+    /* langues et loisirs (badges grisés) */
     .lang-hobby {
-      background: white;
-      border-radius: 60px 20px 60px 20px;
-      padding: 2rem;
+      background: #dde9f7;
+      border-radius: 80px 20px 80px 20px;
+      padding: 2.5rem;
       display: flex;
       flex-wrap: wrap;
       gap: 2.5rem;
-      border: 1px solid #cde0f8;
+      border: 1px solid white;
+      box-shadow: 0 10px 25px -12px #6d8eb0;
     }
 
     .lang-badge {
-      background: #e7f0ff;
-      padding: 0.5rem 2rem 0.5rem 1.5rem;
-      border-radius: 60px;
+      background: #ffffffde;
+      padding: 0.6rem 2.2rem 0.6rem 1.8rem;
+      border-radius: 100px;
       font-weight: 600;
-      border: 1px solid #8fb6e8;
+      border: 1px solid #a1c0e6;
       display: inline-flex;
       align-items: center;
       gap: 1rem;
+      box-shadow: 0 6px 10px #c1d3e8;
     }
 
     .lang-level {
-      background: #336699;
+      background: #375e86;
       color: white;
       border-radius: 60px;
-      padding: 0.2rem 1rem;
+      padding: 0.3rem 1.2rem;
       font-size: 0.8rem;
     }
 
     .hobby-item {
-      background: #dfebfc;
-      padding: 0.5rem 2rem;
-      border-radius: 60px;
+      background: #f0f6ff;
+      padding: 0.6rem 2.2rem;
+      border-radius: 100px;
       font-weight: 600;
-      border: 1px solid #6f9fd3;
-    }
-
-    /* cartes exp/formation */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.8rem;
-    }
-
-    .card {
-      background: white;
-      border-radius: 28px 10px 28px 10px;
-      padding: 1.8rem;
-      box-shadow: 0 15px 25px -12px #9eb9d8;
-      border: 1px solid #e2efff;
+      border: 1px solid #7fa5cf;
+      box-shadow: 0 4px 8px #b2cae8;
       transition: 0.2s;
     }
 
+    .hobby-item:hover {
+      background: white;
+      transform: scale(1.05);
+    }
+
+    /* cartes expérience/formation */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #ffffffda;
+      backdrop-filter: blur(4px);
+      border-radius: 38px 12px 38px 12px;
+      padding: 2rem;
+      box-shadow: 0 20px 30px -15px #6a88aa, 0 4px 0 0 #cedff5 inset;
+      border: 1px solid white;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+    }
+
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 25px 35px -12px #1e4670;
+      transform: translateY(-12px) scale(1.01);
+      box-shadow: 0 30px 40px -12px #1f3d60, 0 0 0 3px white;
     }
 
     .card-year {
-      background: #1e4a76;
+      background: #274a71;
       color: white;
       display: inline-block;
-      padding: 0.2rem 1.2rem;
+      padding: 0.2rem 1.4rem;
       border-radius: 60px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      margin-bottom: 0.8rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 0 #0b1f32;
     }
 
-    /* compétences */
+    .card h3 {
+      font-size: 1.3rem;
+      color: #103352;
+    }
+
+    .card-desc {
+      margin-top: 0.8rem;
+      color: #2f4d72;
+      border-left: 5px solid #567faf;
+      padding-left: 1rem;
+    }
+
+    /* compétences cloud */
     .skills-panel {
-      background: #eaf3ff;
-      border-radius: 60px 20px 60px 20px;
-      padding: 2.5rem;
+      background: #ddecfd;
+      border-radius: 80px 20px 80px 20px;
+      padding: 2.8rem;
       border: 2px solid white;
+      box-shadow: 0 0 0 4px #f0f7ff inset;
     }
 
     .skill-cloud {
@@ -320,21 +385,30 @@
 
     .skill-item {
       background: white;
-      padding: 0.8rem 1.8rem;
-      border-radius: 60px;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
       font-weight: 600;
-      color: #154a76;
-      box-shadow: 0 6px 10px -6px #2c5782;
-      border: 1px solid #b6d4fc;
+      color: #1c4a77;
+      box-shadow: 0 10px 16px -12px #1b3e62, 0 0 0 1px #c2daff inset;
+      transition: 0.2s;
+      cursor: default;
+      font-size: 1rem;
     }
 
-    /* zone dynamique */
+    .skill-item:hover {
+      background: #305d89;
+      color: white;
+      transform: scale(1.08) rotate(0.5deg);
+      box-shadow: 0 18px 22px -12px #00223d;
+    }
+
+    /* zone dynamique + gris */
     .dynamic-zone {
-      background: #d7e8ff;
-      border-radius: 80px 20px 80px 20px;
-      padding: 2.5rem;
-      margin-top: 2rem;
+      background: linear-gradient(145deg, #e3efff, #ccdff5);
+      border-radius: 90px 20px 90px 20px;
+      padding: 2.8rem;
       border: 2px solid white;
+      box-shadow: 0 20px 30px -10px #3d6185;
     }
 
     .dynamic-wrapper {
@@ -345,37 +419,48 @@
     }
 
     .dynamic-btn {
-      background: #1b4a77;
+      background: linear-gradient(125deg, #2b4e78, #173a5c);
       border: none;
       color: white;
-      padding: 1.2rem 2.5rem;
-      border-radius: 60px;
+      padding: 1.3rem 3rem;
+      border-radius: 80px;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      border: 1px solid #b1d0f7;
+      gap: 1rem;
+      border: 1px solid #d1e6ff;
+      box-shadow: 0 16px 24px -10px #001b33;
+      transition: all 0.25s;
+    }
+
+    .dynamic-btn:hover {
+      background: linear-gradient(125deg, #386aa0, #1e4875);
+      transform: scale(1.05) translateY(-4px);
+      box-shadow: 0 24px 32px -10px #021c33;
     }
 
     .dynamic-message {
       background: white;
-      padding: 1rem 2rem;
-      border-radius: 60px;
+      padding: 1.2rem 2.5rem;
+      border-radius: 120px;
       flex: 1;
       font-weight: 600;
-      color: #002856;
+      color: #003366;
+      font-size: 1.1rem;
       text-align: center;
+      box-shadow: inset 0 4px 12px #cddef7, 0 8px 16px -12px #172e44;
     }
 
-    /* footer */
+    /* FOOTER avec liens sociaux corrigés */
     .site-footer {
-      background: #1a3550;
-      color: #c9dcf5;
-      padding: 2rem;
-      border-radius: 60px 60px 0 0;
-      margin-top: 4rem;
+      background: #253c56;
+      color: #e0edfe;
+      padding: 2.5rem;
+      border-radius: 80px 80px 0 0;
+      margin-top: 5rem;
+      box-shadow: 0 -10px 30px #10273f;
     }
 
     .footer-content {
@@ -385,24 +470,35 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      gap: 1.5rem;
     }
 
-    .social i {
-      font-size: 1.5rem;
-      margin: 0 0.4rem;
-      color: #b5d1f0;
+    .social a {
+      color: #bed9ff;
+      font-size: 2rem;
+      margin: 0 0.5rem;
+      transition: 0.2s;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .social a:hover {
+      color: white;
+      transform: scale(1.2) translateY(-5px);
+      filter: drop-shadow(0 6px 8px #02172a);
     }
 
     @media (max-width: 700px) {
       .header-container { flex-direction: column; align-items: start; }
       .quick-info { flex-direction: column; width: 100%; }
       .profil-contact { grid-template-columns: 1fr; }
+      .dynamic-wrapper { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 🌟 MENU FLOTTANT : icône hamburger + panneau de navigation -->
+  <!-- 🌟 MENU FLOTTANT AMÉLIORÉ -->
   <div class="menu-flottant">
     <div class="menu-icon" id="menuToggle">
       <i class="fas fa-bars" id="menuIcon"></i>
@@ -410,12 +506,12 @@
     <nav class="nav-panel" id="navPanel">
       <ul>
         <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
-        <li><a href="#profil"><i class="fas fa-user"></i> Profil</a></li>
+        <li><a href="#profil"><i class="fas fa-user-astronaut"></i> Profil</a></li>
         <li><a href="#langues"><i class="fas fa-language"></i> Langues & Loisirs</a></li>
         <li><a href="#experiences"><i class="fas fa-briefcase"></i> Expériences</a></li>
         <li><a href="#formations"><i class="fas fa-graduation-cap"></i> Formations</a></li>
-        <li><a href="#competences"><i class="fas fa-cogs"></i> Compétences</a></li>
-        <li><a href="#interactif"><i class="fas fa-comment"></i> Zone interactive</a></li>
+        <li><a href="#competences"><i class="fas fa-microchip"></i> Compétences</a></li>
+        <li><a href="#interactif"><i class="fas fa-comment-dots"></i> Zone interactive</a></li>
       </ul>
     </nav>
   </div>
@@ -423,14 +519,14 @@
   <!-- ACCUEIL (ancre) -->
   <span id="accueil"></span>
 
-  <!-- HEADER -->
+  <!-- HEADER amélioré -->
   <header class="site-header">
     <div class="header-container">
       <div class="identity">
         <h1>Mourtalla NGOM</h1>
         <div class="title">
           <i class="fas fa-bolt" style="color: #ffd966;"></i> Technicien Supérieur Électrotechnique
-          <span class="badge-pill">L3 Génie Électrique</span>
+          <span class="badge-pill"><i class="fas fa-graduation-cap"></i> L3 Génie Électrique</span>
         </div>
       </div>
       <div class="quick-info">
@@ -446,11 +542,11 @@
     <div class="section-title"><i class="fas fa-user-circle"></i> Profil & Contact</div>
     <div class="profil-contact">
       <div class="profil-text">
-        <i class="fas fa-quote-left" style="color:#2f5f8a; opacity:0.4;"></i>
+        <i class="fas fa-quote-left" style="color:#3c6190; opacity:0.4; font-size:2rem;"></i>
         Titulaire d'une Licence en Génie Électrique, je suis rigoureux, sociable et méthodique. Sens de l'observation, d'analyse et d'adaptation. Mes expériences et compétences me poussent à vouloir intégrer votre structure.
       </div>
       <div class="contact-mini">
-        <div class="contact-line"><i class="fas fa-phone"></i> 78 455 91 12</div>
+        <div class="contact-line"><i class="fas fa-phone-alt"></i> 78 455 91 12</div>
         <div class="contact-line"><i class="fas fa-envelope"></i> Mourtalla512@gmail.com</div>
         <div class="contact-line"><i class="fas fa-map-pin"></i> Dakar HLM 2</div>
       </div>
@@ -461,7 +557,7 @@
   <section id="langues" class="section">
     <div class="section-title"><i class="fas fa-heart"></i> Langues & Loisirs</div>
     <div class="lang-hobby">
-      <div class="lang-list" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
         <span class="lang-badge">Français <span class="lang-level">Bon niveau</span></span>
         <span class="lang-badge">Anglais <span class="lang-level">Moyen</span></span>
         <span class="lang-badge">Wolof <span class="lang-level">Maternelle</span></span>
@@ -508,24 +604,30 @@
     <div class="section-title"><i class="fas fa-comment-dots"></i> Zone interactive</div>
     <div class="dynamic-zone">
       <div class="dynamic-wrapper">
-        <button class="dynamic-btn" id="revealBtn"><i class="fas fa-sync-alt"></i> Parcours express</button>
+        <button class="dynamic-btn" id="revealBtn"><i class="fas fa-sync-alt fa-spin"></i> Parcours express</button>
         <div class="dynamic-message" id="displayMsg">Cliquez pour explorer mes atouts</div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER avec LIEN LINKEDIN CORRIGÉ (votre demande) -->
   <footer class="site-footer">
     <div class="footer-content">
-      <span>© 2026 Mourtalla NGOM</span>
+      <span>© 2026 Mourtalla NGOM · Électrotechnicien</span>
       <span><i class="fas fa-bolt"></i> Disponible</span>
-      <div class="social"><i class="fab fa-linkedin"></i> <i class="fab fa-github"></i></div>
+      <div class="social">
+        <!-- Lien LinkedIn fonctionnel (mettre votre URL) -->
+        <a href="https://www.linkedin.com/in/mourtalla-ngom-a00780269/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+     
+      </div>
     </div>
   </footer>
 
   <script>
     (function() {
-      // === MENU HAMBURGER ===
+      // === MENU HAMBURGER avec animations ===
       const toggleBtn = document.getElementById('menuToggle');
       const panel = document.getElementById('navPanel');
       const icon = document.getElementById('menuIcon');
@@ -533,19 +635,20 @@
       toggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         panel.classList.toggle('open');
-        // changer icône entre bars et times
         if (panel.classList.contains('open')) {
           icon.classList.remove('fa-bars');
           icon.classList.add('fa-times');
+          // petit effet sur l'icône
+          toggleBtn.style.transform = 'scale(1.1)';
+          setTimeout(() => toggleBtn.style.transform = 'scale(1)', 200);
         } else {
           icon.classList.remove('fa-times');
           icon.classList.add('fa-bars');
         }
       });
 
-      // fermer le menu si on clique sur un lien (optionnel)
-      const navLinks = document.querySelectorAll('.nav-panel a');
-      navLinks.forEach(link => {
+      // fermer au clic sur un lien
+      document.querySelectorAll('.nav-panel a').forEach(link => {
         link.addEventListener('click', () => {
           panel.classList.remove('open');
           icon.classList.remove('fa-times');
@@ -553,7 +656,7 @@
         });
       });
 
-      // fermer si on clique en dehors (optionnel, plus confortable)
+      // fermer si clic à l'extérieur
       document.addEventListener('click', (e) => {
         if (!panel.contains(e.target) && !toggleBtn.contains(e.target)) {
           panel.classList.remove('open');
@@ -562,11 +665,11 @@
         }
       });
 
-      // === NUAGE DE COMPÉTENCES ===
+      // === NUAGE DE COMPÉTENCES enrichi ===
       const skills = [
-        "Installation domestique/industrielle", "Conduite poids léger", "Zelio (Ladder, FBD)",
-        "Mplab", "Proteus", "TIA Siemens", "AutoCAD (implantation)", "Conception réseau électrique",
-        "Excel", "Câblage industrielle", "Dimensionnement solaire"
+        "⚡ Installation domestique/industrielle", "🚗 Conduite poids léger", "⚙️ Zelio (Ladder, FBD)",
+        "💻 Mplab", "🔌 Proteus", "🏭 TIA Siemens", "📐 AutoCAD (implantation)", "📶 Conception réseau électrique",
+        "📊 Excel", "🔧 Câblage industrielle", "☀️ Dimensionnement solaire"
       ];
       const cloud = document.getElementById('skillCloud');
       if (cloud) {
@@ -578,16 +681,16 @@
         });
       }
 
-      // === ZONE DYNAMIQUE (messages) ===
+      // === ZONE DYNAMIQUE (messages plus percutants) ===
       const messages = [
-        "🎓 Licence Génie Électrique - ESP Dakar",
-        "⚡ 2025 : Stage LSE / SOGEA SATOM",
-        "📡 2024 : Technicien NRJ chez SONATEL",
-        "🔧 TIA, Proteus, Zelio, AutoCAD, Mplab",
-        "☀️ Certifié en dimensionnement solaire (2022)",
-        "🏭 Expérience sucrière (CSS) et COSELEC",
+        "🎓 Licence Génie Électrique - ESP Dakar (2024)",
+        "⚡ 2025 : Stage LSE / SOGEA SATOM (câblage industriel)",
+        "📡 2024 : Technicien NRJ chez SONATEL (sites stratégiques)",
+        "🔧 Compétences : TIA, Proteus, Zelio, Mplab, AutoCAD",
+        "☀️ Certifié dimensionnement solaire (2022)",
+        "🏭 Expériences : CSS (sucrière) et COSELEC",
         "🚗 Permis VL (manuel + automatique)",
-        "📍 Basé à Dakar HLM 2"
+        "📍 Basé à Dakar HLM 2 · disponible"
       ];
 
       const msgDiv = document.getElementById('displayMsg');
@@ -597,17 +700,23 @@
       if (btn && msgDiv) {
         btn.addEventListener('click', () => {
           msgDiv.textContent = messages[idx % messages.length];
-          msgDiv.style.background = '#ecf5ff';
-          setTimeout(() => msgDiv.style.background = 'white', 200);
+          // effet de flash
+          msgDiv.style.background = '#f2fdff';
+          msgDiv.style.transform = 'scale(1.02)';
+          setTimeout(() => {
+            msgDiv.style.background = 'white';
+            msgDiv.style.transform = 'scale(1)';
+          }, 200);
           idx++;
         });
 
+        // message initial après 2s
         setTimeout(() => {
-          msgDiv.textContent = "🔋 Bienvenue sur mon site !";
+          msgDiv.textContent = "🔋";
         }, 1500);
       }
 
-      // Animation d'apparition pour les cartes (optionnel)
+      // Animation d'apparition des cartes (Intersection Observer)
       const cards = document.querySelectorAll('.card');
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
@@ -616,13 +725,16 @@
             e.target.style.transform = 'translateY(0)';
           }
         });
-      }, {threshold:0.2});
+      }, { threshold: 0.2 });
+
       cards.forEach(c => {
         c.style.opacity = 0;
-        c.style.transform = 'translateY(20px)';
-        c.style.transition = '0.4s';
+        c.style.transform = 'translateY(25px)';
+        c.style.transition = 'opacity 0.6s, transform 0.5s';
         obs.observe(c);
       });
+
+      // Effet de survol sur les icônes sociales (déjà en css)
     })();
   </script>
 </body>
