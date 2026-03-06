@@ -1,1088 +1,661 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mourtalla Ngom - Portfolio Électrotechnique</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-        }
-
-        :root {
-            --primary: #2c3e50;       /* Gris-bleu foncé */
-            --secondary: #34495e;      /* Gris-bleu moyen */
-            --accent: #4a6b8f;         /* Bleu-gris plus clair */
-            --light: #ecf0f1;          /* Gris très clair */
-            --white: #ffffff;
-            --text: #2c3e50;
-            --bg-gradient: linear-gradient(135deg, #2c3e50 0%, #4a6b8f 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: 0 20px 40px rgba(44, 62, 80, 0.15);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        body {
-            background: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* ===== LOADER ===== */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeOut 1s ease 1.5s forwards;
-        }
-
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid var(--light);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeOut {
-            to { opacity: 0; visibility: hidden; }
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            background: var(--white);
-            backdrop-filter: blur(10px);
-            padding: 1rem 5%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 5px 20px rgba(44, 62, 80, 0.1);
-            animation: slideInLeft 0.8s ease;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--bg-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary);
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 4rem;
-        }
-
-        .hero-content {
-            flex: 1;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 700;
-            background: var(--bg-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content h2 {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--secondary);
-            font-weight: 400;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-        }
-
-        .hero-image {
-            flex: 1;
-            text-align: center;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 30px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .hero-image img:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--bg-gradient);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(44, 62, 80, 0.2);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(44, 62, 80, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            margin-left: 1rem;
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        /* ===== SECTION STYLES ===== */
-        section {
-            padding: 5rem 5%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            margin-bottom: 1rem;
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--bg-gradient);
-            border-radius: 3px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--secondary);
-            margin-bottom: 4rem;
-            font-size: 1.1rem;
-        }
-
-        /* ===== EXPERIENCE SECTION ===== */
-        .timeline {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: var(--accent);
-            opacity: 0.3;
-        }
-
-        .timeline-item {
-            margin-bottom: 3rem;
-            position: relative;
-            animation: scaleIn 0.6s ease;
-        }
-
-        .timeline-item:nth-child(odd) {
-            padding-right: 50%;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) {
-            padding-left: 50%;
-            text-align: left;
-        }
-
-        .timeline-content {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(44, 62, 80, 0.2);
-        }
-
-        .timeline-content h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-        }
-
-        .timeline-content .date {
-            color: var(--secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-            padding: 0.2rem 1rem;
-            background: var(--light);
-            border-radius: 20px;
-        }
-
-        /* ===== EDUCATION SECTION ===== */
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .education-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            animation: fadeInUp 0.6s ease;
-            border-left: 4px solid var(--accent);
-        }
-
-        .education-card:hover {
-            transform: translateY(-10px) scale(1.02);
-        }
-
-        .education-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .education-card .institution {
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-card .date {
-            color: var(--secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        /* ===== SKILLS SECTION ===== */
-        .skills-section {
-            background: var(--white);
-        }
-
-        .skills-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .skills-category {
-            margin-bottom: 3rem;
-        }
-
-        .skills-category h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-item {
-            background: var(--light);
-            padding: 1rem;
-            border-radius: 10px;
-            transition: var(--transition);
-            animation: scaleIn 0.4s ease;
-        }
-
-        .skill-item:hover {
-            background: var(--accent);
-            color: var(--white);
-            transform: translateX(5px);
-        }
-
-        .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: rgba(44, 62, 80, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background: var(--bg-gradient);
-            border-radius: 4px;
-            transition: width 1s ease;
-            width: 0;
-        }
-
-        /* ===== CONTACT SECTION ===== */
-        .contact-section {
-            background: var(--bg-gradient);
-            color: var(--white);
-        }
-
-        .contact-section .section-title {
-            color: var(--white);
-        }
-
-        .contact-section .section-title::after {
-            background: var(--white);
-        }
-
-        .contact-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .contact-info {
-            animation: slideInLeft 0.8s ease;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            transition: var(--transition);
-        }
-
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(10px);
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-        }
-
-        .contact-details h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-details p {
-            opacity: 0.9;
-        }
-
-        .contact-form {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            animation: slideInRight 0.8s ease;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--light);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        /* ===== HOBBIES SECTION ===== */
-        .hobbies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .hobby-item {
-            text-align: center;
-            padding: 2rem;
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            animation: scaleIn 0.4s ease;
-        }
-
-        .hobby-item:hover {
-            transform: translateY(-10px) rotate(5deg);
-            background: var(--accent);
-            color: var(--white);
-        }
-
-        .hobby-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--primary);
-            color: var(--white);
-            padding: 2rem 5%;
-            text-align: center;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media screen and (max-width: 968px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 3rem;
-            }
-
-            .hero-content p {
-                margin: 0 auto 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                padding: 2rem;
-                box-shadow: var(--shadow);
-                animation: slideInLeft 0.3s ease;
-            }
-
-            .timeline::before {
-                left: 30px;
-            }
-
-            .timeline-item:nth-child(odd),
-            .timeline-item:nth-child(even) {
-                padding: 0 0 0 80px;
-                text-align: left;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            section {
-                padding: 3rem 5%;
-            }
-
-            .btn {
-                display: block;
-                width: 100%;
-                margin: 1rem 0;
-            }
-
-            .btn-outline {
-                margin-left: 0;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ===== CUSTOM SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 6px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
-
-        /* ===== ANIMATION CLASSES ===== */
-        .fade-in {
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mourtalla NGOM · Portfolio Électrotechnique</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font (Inter + esprit technique) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 10% 30%, #cad8ed, #97b5d4);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      position: relative;
+      animation: breathe 12s infinite alternate ease-in-out;
+    }
+
+    @keyframes breathe {
+      0% { background: radial-gradient(circle at 10% 30%, #cad8ed, #97b5d4); }
+      100% { background: radial-gradient(circle at 90% 70%, #b7ceea, #6f8db0); }
+    }
+
+    .portfolio-card {
+      max-width: 1400px;
+      width: 100%;
+      background: rgba(248, 251, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 3.5rem 3.5rem 2.5rem 2.5rem;
+      box-shadow: 0 30px 60px -10px rgba(18, 38, 61, 0.4), 0 0 0 1px rgba(255,255,255,0.6) inset, 0 0 0 2px rgba(105, 140, 180, 0.2);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    /* header dynamique + vague */
+    .header-tile {
+      background: linear-gradient(105deg, #1e334d 0%, #2f4f73 45%, #446a94 100%);
+      padding: 2rem 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 4px solid #7ca2cc;
+      position: relative;
+      isolation: isolate;
+    }
+    .header-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 20px, transparent 20px, transparent 40px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .name-title h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: white;
+      line-height: 1;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      animation: glitch 4s infinite;
+    }
+    @keyframes glitch {
+      2%, 8% { transform: skew(2deg, 0.5deg); text-shadow: -2px 0 #58a6ff, 2px 0 #ffb86b; }
+      4% { transform: skew(-2deg, -0.5deg); text-shadow: 2px 0 #58a6ff, -2px 0 #ffb86b; }
+      10%, 100% { transform: skew(0); text-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    }
+
+    .name-title .subhead {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dfe9fc;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-tech {
+      background: linear-gradient(145deg, #345f89, #1c3c5e);
+      padding: 0.3rem 1.5rem;
+      border-radius: 60px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid #8eb6e6;
+      box-shadow: 0 2px 10px #001c33;
+      backdrop-filter: blur(2px);
+    }
+
+    .grid-main {
+      display: grid;
+      grid-template-columns: 1fr 2.1fr;
+      gap: 0;
+    }
+
+    /* colonne gauche améliorée avec glassmorph */
+    .sidebar {
+      background: rgba(219, 235, 250, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 2.5rem 2rem;
+      border-right: 1px solid rgba(104, 144, 187, 0.5);
+      box-shadow: 4px 0 20px -10px #1f3d5e;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      color: #13314f;
+      margin-bottom: 1.2rem;
+      border-bottom: 3px solid #5378a5;
+      padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.2s;
+    }
+    .section-title i {
+      color: #2b5580;
+      font-size: 1.3rem;
+      background: white;
+      padding: 0.3rem;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px #acc6e7;
+    }
+
+    .profile-text {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      padding: 1.4rem;
+      border-radius: 30px 10px 30px 10px;
+      color: #0b273f;
+      font-weight: 400;
+      line-height: 1.7;
+      border: 1px solid white;
+      box-shadow: 0 10px 20px -12px #10273f;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(2px);
+      padding: 0.9rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+      border: 1px solid white;
+      transition: all 0.2s;
+      box-shadow: 0 6px 12px -8px #244460;
+    }
+    .contact-item:hover {
+      background: white;
+      transform: translateX(6px) scale(1.02);
+      border-color: #4273a5;
+    }
+    .contact-item i {
+      width: 28px;
+      color: #1e4b7c;
+      font-size: 1.4rem;
+    }
+
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.75);
+      padding: 0.7rem 1.2rem;
+      border-radius: 60px;
+      margin-bottom: 0.8rem;
+      border: 1px solid #b5cfef;
+      font-weight: 600;
+      color: #103351;
+      backdrop-filter: blur(2px);
+    }
+    .level {
+      background: #31628f;
+      color: white;
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.4px;
+    }
+
+    .hobby-pills {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .hobby-pills span {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      padding: 0.6rem 2rem;
+      border-radius: 120px;
+      border: 1px solid white;
+      font-weight: 600;
+      color: #14466b;
+      box-shadow: 0 4px 8px #97b3d3;
+      transition: 0.2s;
+    }
+    .hobby-pills span:hover {
+      background: white;
+      box-shadow: 0 8px 14px #506e93;
+      transform: scale(1.05);
+    }
+
+    /* colonne droite plus aérée */
+    .main-content {
+      background: rgba(252, 254, 255, 0.6);
+      backdrop-filter: blur(6px);
+      padding: 2.5rem 2.5rem 2.5rem 2rem;
+    }
+
+    .exp-item, .formation-item {
+      margin-bottom: 1.8rem;
+      animation: fadeSlide 0.6s ease backwards;
+    }
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateX(12px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .exp-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.3rem;
+    }
+    .year {
+      background: #203f60;
+      color: white;
+      font-weight: 700;
+      padding: 0.2rem 1.4rem;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      letter-spacing: 0.8px;
+      box-shadow: 0 2px 0 #0b1f31;
+      transition: 0.2s;
+    }
+    .exp-title {
+      font-weight: 700;
+      color: #03223f;
+      font-size: 1.15rem;
+      position: relative;
+    }
+    .exp-place {
+      color: #2a5783;
+      font-weight: 500;
+      font-style: italic;
+    }
+    .exp-desc {
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(2px);
+      padding: 0.9rem 1.3rem;
+      border-radius: 0 24px 24px 24px;
+      color: #0e2c48;
+      border-left: 6px solid #3c6ea0;
+      margin-top: 0.6rem;
+      font-weight: 400;
+      box-shadow: 0 4px 8px #bacde4;
+    }
+
+    .formation-item {
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(4px);
+      border-radius: 30px 8px 30px 8px;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid white;
+      transition: 0.2s;
+    }
+    .formation-item:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: scale(1.01);
+      border-color: #6c94c0;
+    }
+    .diplome {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #0d3a60;
+      margin: 0.2rem 0;
+    }
+
+    /* nuage de compétences interactif + 3D */
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+      perspective: 600px;
+    }
+    .skill-tag {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      padding: 0.7rem 1.5rem;
+      border-radius: 80px;
+      font-weight: 500;
+      color: #113655;
+      box-shadow: 0 4px 10px #acc0db, 0 2px 0 #ffffff inset;
+      border: 1px solid #eef5ff;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+      cursor: default;
+      font-size: 0.9rem;
+      transform: rotateX(0deg) translateZ(0);
+    }
+    .skill-tag:hover {
+      background: #305f8b;
+      color: white;
+      transform: rotateX(4deg) translateZ(12px) scale(1.1);
+      box-shadow: 0 16px 20px -8px #253e5c, 0 0 0 2px white;
+      border-color: #a3c6ff;
+    }
+
+    /* zone dynamique ultra réactive */
+    .dynamic-box {
+      margin-top: 2.5rem;
+      background: rgba(214, 232, 255, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 50px 16px 50px 16px;
+      padding: 1.8rem 2rem;
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 16px 30px -12px #1f3f62, 0 0 0 1px #759cc9 inset;
+    }
+
+    .action-bar {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: linear-gradient(125deg, #234d74, #3f6f9f);
+      border: none;
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 80px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      border: 1px solid #c2ddff;
+      box-shadow: 0 10px 14px -8px #122d44;
+      letter-spacing: 0.5px;
+    }
+    .action-btn:hover {
+      background: linear-gradient(125deg, #2d5d8c, #1d3e62);
+      box-shadow: 0 18px 25px -10px #001e36, 0 0 0 2px white;
+      transform: scale(1.05) translateY(-3px);
+    }
+    .action-btn:active {
+      transform: scale(0.98);
+    }
+
+    #displayZone {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      border-radius: 120px;
+      flex: 1;
+      min-width: 260px;
+      color: #002856;
+      font-weight: 600;
+      font-size: 1.05rem;
+      border: 1px solid white;
+      box-shadow: inset 0 3px 10px #c3d5ed, 0 8px 12px -8px #1f3d60;
+      transition: 0.2s;
+      text-align: center;
+    }
+
+    .footer-note {
+      text-align: right;
+      color: #2e517a;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      border-top: 2px dashed rgba(255,255,255,0.7);
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* bouton flottant pour likes / interaction supplémentaire */
+    .like-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .like-btn {
+      background: transparent;
+      border: 2px solid white;
+      color: #1c4875;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      backdrop-filter: blur(8px);
+    }
+    .like-btn:hover {
+      background: white;
+      color: #0f3860;
+      border-color: #1b4b7a;
+    }
+
+    /* responsive */
+    @media (max-width: 950px) {
+      .grid-main { grid-template-columns: 1fr; }
+      .sidebar { border-right: none; border-bottom: 1px solid #b5c9e0; }
+      .header-tile { flex-direction: column; align-items: start; gap: 1rem; }
+    }
+    @media (max-width: 550px) {
+      .name-title h1 { font-size: 2.4rem; }
+      .action-bar { flex-direction: column; }
+    }
+
+    /* petite animation sur les années */
+    .year {
+      animation: pulseYear 3s infinite;
+    }
+    @keyframes pulseYear {
+      0% { background: #203f60; }
+      50% { background: #345f8b; box-shadow: 0 0 0 3px rgba(255,255,255,0.3); }
+      100% { background: #203f60; }
+    }
+
+    /* chargement dynamique de compétences */
+    .glow {
+      animation: glowPulse 2s infinite;
+    }
+  </style>
 </head>
 <body>
-    <!-- Loader -->
-    <div class="loader">
-        <div class="loader-spinner"></div>
+  <div class="portfolio-card">
+
+    <!-- header amélioré -->
+    <div class="header-tile">
+      <div class="name-title">
+        <h1>MOURTALLA NGOM</h1>
+        <div class="subhead">
+          <i class="fas fa-bolt" style="color: #f5e56b;"></i> Technicien Supérieur Électrotechnique
+          <span class="badge-tech"><i class="fas fa-microchip"></i> L3 Génie Électrique</span>
+        </div>
+      </div>
+      <div style="color: #e5f0ff; font-size: 1.1rem; text-shadow: 0 2px 3px black;">
+        <i class="fas fa-map-marker-alt"></i> Dakar/HLM 2 · <i class="fas fa-phone-alt"></i> 78 455 91 12
+      </div>
     </div>
 
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">M.NGOM</div>
-            <div class="nav-links">
-                <a href="#accueil">Accueil</a>
-                <a href="#experience">Expérience</a>
-                <a href="#formation">Formation</a>
-                <a href="#competences">Compétences</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="menu-toggle">☰</div>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="accueil" class="hero">
-        <div class="hero-content">
-            <h1>Mourtalla Ngom</h1>
-            <h2>Technicien Supérieur en Électrotechnique</h2>
-            <p>Titulaire d'un BTS2 en Électrotechnique, rigoureux, sociable et méthodique, avec un sens aigu de l'observation, d'analyse et d'adaptation.</p>
-            <div>
-                <a href="#contact" class="btn">Me contacter</a>
-                <a href="#competences" class="btn btn-outline">Voir mes compétences</a>
-            </div>
+    <!-- Grille -->
+    <div class="grid-main">
+      <!-- GAUCHE -->
+      <div class="sidebar">
+        <div class="profile-block">
+          <div class="section-title"><i class="fas fa-user-astronaut"></i> Profil</div>
+          <div class="profile-text">
+            <i class="fas fa-quote-left" style="color:#305f88; opacity:0.5;"></i> 
+            Titulaire d'une Licence en Génie Électrique, je suis rigoureux, sociable et méthodique. 
+            Sens de l'observation, d'analyse et d'adaptation. Mes expériences et compétences me poussent à vouloir intégrer votre structure.
+          </div>
         </div>
-        <div class="hero-image">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%232c3e50'/%3E%3Ccircle cx='200' cy='150' r='80' fill='%234a6b8f'/%3E%3Ccircle cx='200' cy='140' r='70' fill='%23ecf0f1'/%3E%3Ctext x='140' y='270' font-family='Arial' font-size='40' fill='%23ffffff'%3E⚡%3C/text%3E%3C/svg%3E"
-                 alt="Mourtalla Ngom">
+
+        <div class="contact-block">
+          <div class="section-title"><i class="fas fa-address-card"></i> Contact</div>
+          <div class="contact-item"><i class="fas fa-phone"></i> 78 455 91 12</div>
+          <div class="contact-item"><i class="fas fa-envelope"></i> Mourtalla512@gmail.com</div>
+          <div class="contact-item"><i class="fas fa-map-pin"></i> Dakar / HLM 2</div>
         </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
-        <h2 class="section-title">Expériences Professionnelles</h2>
-        <p class="section-subtitle">Mon parcours professionnel</p>
-        
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <span class="date">Actuellement</span>
-                    <h3>Technicien NRJ</h3>
-                    <p><strong>SONATEL</strong> - Responsable des sites stratégiques</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <span class="date">2024</span>
-                    <h3>Stage d'un mois</h3>
-                    <p><strong>COSELEC</strong></p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <span class="date">2023</span>
-                    <h3>Stage de deux mois</h3>
-                    <p><strong>Compagnie Sucrière Sénégalaise</strong> - Câblage Industriel</p>
-                </div>
-            </div>
+        <div class="lang-block">
+          <div class="section-title"><i class="fas fa-language"></i> Langues</div>
+          <div class="lang-item"><span>Français 🇫🇷</span><span class="level">Bon niveau</span></div>
+          <div class="lang-item"><span>Anglais 🇬🇧</span><span class="level">Moyen</span></div>
+          <div class="lang-item"><span>Wolof 🇸🇳</span><span class="level">Maternelle</span></div>
         </div>
-    </section>
 
-    <!-- Education Section -->
-    <section id="formation">
-        <h2 class="section-title">Formations & Diplômes</h2>
-        <p class="section-subtitle">Mon parcours académique</p>
-        
-        <div class="education-grid">
-            <div class="education-card">
-                <h3>Licence 3 en Distribution Électrique et Automatisme</h3>
-                <p class="institution">École Supérieure Polytechnique de Dakar</p>
-                <p class="date">2023 - 2024</p>
-            </div>
-
-            <div class="education-card">
-                <h3>Brevet de Technicien Supérieur (BTS2) en Électrotechnique</h3>
-                <p class="institution">CEDT LE G15</p>
-                <p class="date">2021 - 2023</p>
-            </div>
-
-            <div class="education-card">
-                <h3>Attestation en Dimensionnement Solaire</h3>
-                <p class="institution">CEDT LE G15</p>
-                <p class="date">2022</p>
-            </div>
-
-            <div class="education-card">
-                <h3>Baccalauréat S2</h3>
-                <p class="institution">Lycée Mame Cheikh Mbaye de Tamba</p>
-                <p class="date">2020 - 2021</p>
-            </div>
+        <div class="hobby-block">
+          <div class="section-title"><i class="fas fa-dumbbell"></i> Loisirs</div>
+          <div class="hobby-pills">
+            <span><i class="fas fa-futbol"></i> Sport</span>
+            <span><i class="fas fa-dice"></i> Scrabble</span>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- Skills Section -->
-    <section id="competences" class="skills-section">
-        <h2 class="section-title">Compétences Techniques</h2>
-        <p class="section-subtitle">Mon expertise technique</p>
-        
-        <div class="skills-container">
-            <div class="skills-category">
-                <h3>Compétences Métier</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Installation domestique et industrielle</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Conduite de véhicule (poids léger)</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Câblage Industriel</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Dimensionnement Solaire</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 80%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skills-category">
-                <h3>Logiciels Maîtrisés</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Zelio (Ladder, FBD)</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Mplab / Proteus</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>TIA Siemens</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 80%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>AutoCAD / Conception Réseau Électrique</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Excel</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 75%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- DROITE -->
+      <div class="main-content">
+        <!-- Expériences -->
+        <div class="section-title"><i class="fas fa-briefcase"></i> Expériences</div>
+        <div class="exp-item" style="animation-delay: 0.1s;">
+          <div class="exp-header"><span class="year">2025</span><span class="exp-title">Stage technicien électrique</span><span class="exp-place">· LSE/SOGEA SATOM</span></div>
+          <div class="exp-desc">Câblage industrielle, maintenance, suivi des installations chez les spécialistes de l'énergie.</div>
         </div>
-    </section>
-
-    <!-- Languages & Hobbies -->
-    <section id="langues">
-        <h2 class="section-title">Langues & Loisirs</h2>
-        <p class="section-subtitle">Centres d'intérêt</p>
-        
-        <div class="skills-container">
-            <div class="skills-category">
-                <h3>Langues</h3>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Français (Bon niveau)</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Anglais (Moyen)</span>
-                            <span>60%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 60%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Wolof (Maternelle)</span>
-                            <span>100%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 100%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hobbies-grid">
-                <div class="hobby-item">
-                    <span class="hobby-icon">🏅</span>
-                    <h3>Sport</h3>
-                </div>
-                <div class="hobby-item">
-                    <span class="hobby-icon">🎲</span>
-                    <h3>Scrabble</h3>
-                </div>
-            </div>
+        <div class="exp-item" style="animation-delay: 0.2s;">
+          <div class="exp-header"><span class="year">2024</span><span class="exp-title">Technicien NRJ (SONATEL)</span><span class="exp-place">· responsable sites stratégiques</span></div>
+          <div class="exp-desc">Supervision des équipements électriques, maintenance préventive sur sites sensibles.</div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-subtitle">N'hésitez pas à me contacter</p>
-        
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-details">
-                        <h3>Téléphone</h3>
-                        <p>78 455 91 12</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div class="contact-details">
-                        <h3>Email</h3>
-                        <p>Mourtalla512@gmail.com</p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div class="contact-details">
-                        <h3>Adresse</h3>
-                        <p>Dakar / HLM 2</p>
-                    </div>
-                </div>
-            </div>
-            
-         
+        <div class="exp-item" style="animation-delay: 0.3s;">
+          <div class="exp-header"><span class="year">2024</span><span class="exp-title">Stage COSELEC</span><span class="exp-place">· 1 mois</span></div>
+          <div class="exp-desc">Découverte des réseaux électriques basse tension et armoires industrielles.</div>
         </div>
-    </section>
+        <div class="exp-item" style="animation-delay: 0.4s;">
+          <div class="exp-header"><span class="year">2023</span><span class="exp-title">Stage Compagnie Sucrière Sénégalaise</span><span class="exp-place">· 2 mois</span></div>
+          <div class="exp-desc">Câblage industrielle et maintenance d'équipements automatisés.</div>
+        </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Mourtalla Ngom - Tous droits réservés - Portfolio Électrotechnique</p>
-    </footer>
+        <!-- Formations -->
+        <div class="section-title" style="margin-top: 2.2rem;"><i class="fas fa-graduation-cap"></i> Formations</div>
+        <div class="formation-item" style="animation-delay: 0.2s;">
+          <span class="year">2023/2024</span>
+          <div class="diplome">Licence 3 Génie Électrique (distrib. électrique & automatisme)</div>
+          <div class="etablissement">École Supérieure Polytechnique de Dakar</div>
+        </div>
+        <div class="formation-item" style="animation-delay: 0.25s;">
+          <span class="year">2021/2023</span>
+          <div class="diplome">BTS2 Électrotechnique</div>
+          <div class="etablissement">CEDT Le G15</div>
+        </div>
+        <div class="formation-item" style="animation-delay: 0.3s;">
+          <span class="year">2022</span>
+          <div class="diplome">Attestation Dimensionnement Solaire</div>
+        </div>
+        <div class="formation-item" style="animation-delay: 0.35s;">
+          <span class="year">2020/2021</span>
+          <div class="diplome">Baccalauréat S2</div>
+          <div class="etablissement">Lycée Mame Cheikh Mbaye de Tamba</div>
+        </div>
 
-    <script>
-        // Mobile menu toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+        <!-- Compétences cloud dynamique (injecté par JS) -->
+        <div class="section-title" style="margin-top: 2.2rem;"><i class="fas fa-cogs"></i> Compétences</div>
+        <div class="skills-cloud" id="skillCloud"></div>
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        <!-- Zone dynamique améliorée + like compteur -->
+        <div class="dynamic-box">
+          <div class="action-bar">
+            <button class="action-btn" id="revealBtn"><i class="fas fa-sync-alt fa-spin" style="--fa-animation-duration: 3s;"></i> Cliquez ici pour resume </button>
+            <div id="displayZone">✨ Interagissez ✨</div>
+          </div>
+          <div class="footer-note">
+            <span><i class="fas fa-bolt" style="color:#0d3f70;"></i> électrotech · automation · solaire</span>
+            <div class="like-area">
+              <span id="likeCount">124</span>
+              <button class="like-btn" id="likeBtn"><i class="fas fa-heart"></i> J'aime</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Compétences enrichies depuis le CV
+      const skills = [
+        "Installation domestique/industrielle", "Conduite poids léger (manuelle/auto)",
+        "Zelio (Ladder, FBD)", "Mplab", "Proteus", "TIA Siemens", "AutoCAD (implantation)",
+        "Conception réseau électrique", "Excel", "Câblage industrielle", "Dimensionnement solaire"
+      ];
+
+      const cloud = document.getElementById('skillCloud');
+      if (cloud) {
+        skills.forEach(skill => {
+          const tag = document.createElement('span');
+          tag.className = 'skill-tag';
+          tag.textContent = skill;
+          cloud.appendChild(tag);
         });
+      }
 
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu after click
-                    navLinks.classList.remove('active');
-                }
-            });
+      // Données pour le défilement dynamique (encore plus d'infos)
+      const messages = [
+        "🔋 Licence Génie Électrique (ESP Dakar) 2024",
+        "⚡ Stage LSE/SOGEA SATOM : câblage industriel",
+        "📡 2024 : Technicien NRJ chez SONATEL (sites stratégiques)",
+        "🔧 Maîtrise TIA, Proteus, Zelio, Mplab, AutoCAD",
+        "☀️ Certifié dimensionnement solaire (2022)",
+        "🏭 Expérience sucrière (CSS) – 2 mois câblage",
+        "🎓 BTS Électrotechnique CEDT G15 + Bac S2",
+        "🚗 Permis VL (manuel + auto) · véhicule de service",
+        "📍 Dakar HLM 2 · disponibilité immédiate",
+        "📊 Excel · Conception réseau électrique"
+      ];
+
+      const displayZone = document.getElementById('displayZone');
+      const revealBtn = document.getElementById('revealBtn');
+      let msgIndex = 0;
+
+      function showNextMessage() {
+        displayZone.textContent = messages[msgIndex % messages.length];
+        // effet flash
+        displayZone.style.transform = 'scale(1.02)';
+        displayZone.style.background = '#d8ecff';
+        setTimeout(() => {
+          displayZone.style.transform = 'scale(1)';
+          displayZone.style.background = 'rgba(255,255,255,0.8)';
+        }, 200);
+        msgIndex++;
+      }
+
+      if (revealBtn) {
+        revealBtn.addEventListener('click', showNextMessage);
+        // premier message après 2s
+        setTimeout(() => {
+          displayZone.textContent = "🔍 Mourtalla NGOM · 5 expériences · prêt à relever des défis";
+        }, 1500);
+      }
+
+      // Like button interactif
+      const likeBtn = document.getElementById('likeBtn');
+      const likeSpan = document.getElementById('likeCount');
+      let likes = 124;
+      if (likeBtn) {
+        likeBtn.addEventListener('click', () => {
+          likes += 1;
+          likeSpan.textContent = likes;
+          likeBtn.style.background = '#ffd966';
+          likeBtn.style.color = '#102b44';
+          setTimeout(() => {
+            likeBtn.style.background = 'transparent';
+            likeBtn.style.color = '#1c4875';
+          }, 200);
         });
+      }
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      // Petite animation sur les années (effet pulse personnalisé)
+      // déjà en CSS
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    
-                    // Animate progress bars when in view
-                    if (entry.target.classList.contains('skills-container')) {
-                        const progressBars = entry.target.querySelectorAll('.progress');
-                        progressBars.forEach(bar => {
-                            const width = bar.style.width;
-                            bar.style.width = '0';
-                            setTimeout(() => {
-                                bar.style.width = width;
-                            }, 100);
-                        });
-                    }
-                }
-            });
-        }, observerOptions);
+      // Hover sur header déjà fait
 
-        // Observe elements for animation
-        document.querySelectorAll('.timeline-item, .education-card, .skill-item, .hobby-item, .contact-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Observe skills container for progress bars
-        observer.observe(document.querySelector('.skills-container'));
-
-        // Parallax effect on hero
-        window.addEventListener('scroll', () => {
-            const heroImage = document.querySelector('.hero-image');
-            if (heroImage) {
-                const scrolled = window.pageYOffset;
-                heroImage.style.transform = `translateY(${scrolled * 0.2}px)`;
-            }
-        });
-
-        // Active link highlighting
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+      // bonus : horloge / message de visite (optionnel)
+      const footerNote = document.querySelector('.footer-note span');
+      if (footerNote) {
+        const now = new Date();
+        const hours = now.getHours();
+        let greeting = hours < 12 ? '☀️ matin' : hours < 18 ? '⛅ après-midi' : '🌙 soir';
+      }
+    })();
+  </script>
 </body>
 </html>
